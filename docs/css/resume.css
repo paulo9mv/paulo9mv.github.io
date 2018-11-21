@@ -3,6 +3,9 @@
  * Copyright 2013-2018 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-resume/blob/master/LICENSE)
  */
+ table { border-collapse: collapse; font-family: Calibri, sans-serif; }
+ colgroup, tbody { border: solid medium; }
+ td { border: solid thin; height: 1.4em; width: 1.4em; text-align: center; padding: 0; }
 
 body {
   font-family: 'Muli', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -192,8 +195,11 @@ a:hover, a:focus, a:active {
 }
 
 .grid-container {
-  display: grid;
-}
+ display: grid;
+ grid-template-columns: auto auto auto auto auto auto auto auto auto;
+ grid-template-rows: auto auto auto auto auto auto auto auto auto;
+ background-color: #2196F3;
+ padding: 10px;}
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.8);
