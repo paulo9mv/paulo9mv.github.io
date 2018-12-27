@@ -340,29 +340,27 @@
 <section class="resume-section p-3 p-lg-5" id="campominado">
     <div class="my-auto">
 <h2>Campo Minado</h2>
-<p>Texto campo minado
+<p>Este campo minado foi implementado para diversão rápida e intuitiva.
     </p>
-    <table id="tabela">
+    <table id="tabelacampo">
 <caption>Campo Minado</caption>
-<colgroup><col><col><col>
-<colgroup><col><col><col>
-<colgroup><col><col><col>
+
 
 <tbody>
  <tr> <td class="campominado"> <td class="campominado">  <td class="campominado"> <td class="campominado"> <td class="campominado">  <td class="campominado"> <td class="campominado"> <td class="campominado">  <td class="campominado">
  <tr> <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado"> <td class="campominado">
  <tr> <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">
-<tbody>
+
  <tr> <td class="campominado"> <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado">
  <tr> <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">
  <tr> <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado">
-<tbody>
+
  <tr> <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">
  <tr> <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado">  <td class="campominado">
  <tr> <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado">
 
 </table>
-<button >Resolver</button>
+<button onclick=gerar()>Resolver</button>
 <button >Limpar</button>
 </div>
 </section>
@@ -380,6 +378,7 @@
     <!-- Custom scripts for this template -->
     <script src="docs/js/resume.min.js"></script>
     <script src="docs/js/sudoku.js"></script>
+    <script src="docs/js/campominado.js"></script>
 
     <script>
 
@@ -389,6 +388,14 @@
             cells[i].onclick = function(){increase(this);};
         }
 
+        var tablecampo = document.getElementById('tabelacampo');
+        var campos = tablecampo.getElementsByClassName("campominado");
+
+        for (var i = 0; i < campos.length; i++) {
+            campos[i].onclick = function(){
+              checar(this);
+            };
+        }
         </script>
 
  </body>
