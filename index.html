@@ -340,10 +340,10 @@
 <section class="resume-section p-3 p-lg-5" id="campominado">
     <div class="my-auto">
 <h2>Campo Minado</h2>
-<p>Este campo minado foi implementado para diversão rápida e intuitiva.
+<p>Mais uma diversão para você, usuário desse site. Esse campo minado possui 10 bombas espalhadas aleatoriamente. Consiga o melhor tempo possível!
     </p>
     <table id="tabelacampo">
-<caption>Campo Minado</caption>
+<caption id="textocampominado"></caption>
 
 
 <tbody>
@@ -360,8 +360,7 @@
  <tr> <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado">
 
 </table>
-<button onclick=gerar()>Resolver</button>
-<button >Limpar</button>
+<button onclick=gerar()>Novo jogo</button>
 </div>
 </section>
     </div>
@@ -380,6 +379,7 @@
     <script src="docs/js/sudoku.js"></script>
     <script src="docs/js/campominado.js"></script>
 
+
     <script>
 
         var table = document.getElementById('tabela');
@@ -391,11 +391,7 @@
         var tablecampo = document.getElementById('tabelacampo');
         var campos = tablecampo.getElementsByClassName("campominado");
 
-        for (var i = 0; i < campos.length; i++) {
-            campos[i].onclick = function(){
-              checar(this);
-            };
-        }
+
         </script>
 
  </body>
