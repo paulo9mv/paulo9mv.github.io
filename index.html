@@ -362,7 +362,7 @@
  <tr> <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado"> <td class="campominado">  <td class="campominado">  <td class="campominado">
 
 </table>
-<button onclick=gerar()>Novo jogo</button>
+<button type="button" class="btn btn-outline-dark" onclick=iniciar()>Novo jogo</button>
 </div>
 </section>
     </div>
@@ -375,6 +375,9 @@
 
     <!-- Plugin JavaScript -->
     <script src="docs/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom classes for this template-->
+    <script src="docs/js/classes/Minado.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="docs/js/resume.min.js"></script>
@@ -393,8 +396,7 @@
         var tablecampo = document.getElementById('tabelacampo');
         var campos = tablecampo.getElementsByClassName("campominado");
 
-
-        </script>
+    </script>
 
  </body>
 

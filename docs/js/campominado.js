@@ -1,56 +1,15 @@
-class Minado{
-  constructor(){
-    this.casas = [];
-    this.revelado = [];
-    this.zerar();
-  }
-  zerar(){
-    for(var i = 0; i < 81; i++){
-      this.casas[i] = 0;
-      this.revelado[i] = 0;
-    }
-  }
-  gerar(){
-    this.zerar();
-    for (var i = 0; i < campos.length; i++) {
-      campos[i].onclick = function(){
-        checar(this);
-      };
-    }
-    for(var i = 0; i < nbombas;){
-      var rand = Math.floor(Math.random() * 81);
-      if(minado.casas[rand] != '*'){
-        minado.casas[rand] = '*';
-        i++;
-      }
-    }
-    this.preencher();
-  }
-  preencher(){
+var text = document.getElementById("textocampominado");
 
+var m;
+var s;
+var mm;
 
-    for(var i = 0; i < 9; i++){
-      for(var j = 0; j < 9; j++){
-        if(minado.casas[i*9 + j] == '*'){
+var intervalo;
 
-          if(row_limit > 0){
-            for(var x = Math.max(0, i-1); x <= Math.min(i+1, row_limit); x++){
-              for(var y = Math.max(0, j-1); y <= Math.min(j+1, column_limit); y++){
-                if((x != i || y != j) && minado.casas[x*9 + y] != '*'){
-                  minado.casas[x*9 + y] += 1;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-  }
-}
+const qtdcampos = 81;
 const nbombas = 10;
-var row_limit = 8;
-var column_limit = 8;
+var row_limit = 9;
+var column_limit = 9;
 
 var minado = new Minado();
 
@@ -63,41 +22,34 @@ function checar(a){
   if(minado.casas[indice] != '*'){
     if(minado.casas[indice] != '*' && minado.casas[indice] != 0){
       campos[indice].innerText = minado.casas[indice];
-      minado.revelado[indice] = 1;
+      if(minado.revelado[indice] == 0){
+        minado.revelado[indice] = 1;
+        minado.revelados++;
+      }
     }
-
     else if(minado.casas[indice] == 0 && minado.revelado[indice] == 0)
-      adjacente(i,j);
-
+    adjacente(i,j);
     checkwin();
-
   }
   else
   endgame();
 
 }
-function wingame(){
-  clearInterval(intervalo);
-  for(var i = 0; i < 81; i++)
-  campos[i].onclick=function(){};
 
-  text.innerText = "Você venceu! Seu tempo foi de " + text.innerText;
-}
 function checkwin(){
-  let cont = 0;
-  for(var i = 0; i < 81; i++){
-    if(minado.revelado[i] == 0)
-    cont++;
-  }
-  if(cont == nbombas)
-  wingame();
+  if(minado.revelados == (qtdcampos - nbombas)){
+    clearInterval(intervalo);
+    for(var i = 0; i < qtdcampos; i++)
+    campos[i].onclick=function(){};
 
+    text.innerText = "Você venceu! Seu tempo foi de " + text.innerText;
+  }
 }
 function endgame(){
   for(var i = 0; i < 81; i++){
-    if(minado.casas[i] == '*'){
-      campos[i].innerText = minado.casas[i];
-    }
+    if(minado.casas[i] == '*')
+    campos[i].innerText = minado.casas[i];
+
     campos[i].onclick=function(){};
   }
   clearInterval(intervalo);
@@ -105,35 +57,37 @@ function endgame(){
 }
 
 function adjacente(i,j){
-  var row_limit = 8;
-  var column_limit = 8;
   campos[i*9 + j].innerText = minado.casas[i*9 + j];
-  minado.revelado[i*9+j] = 1;
 
-  if(row_limit > 0){
-    for(var x = Math.max(0, i-1); x <= Math.min(i+1, row_limit); x++){
-      for(var y = Math.max(0, j-1); y <= Math.min(j+1, column_limit); y++){
+  if(minado.revelado[i*9+j] == 0){
+    minado.revelado[i*9+j] = 1;
+    minado.revelados++;
+  }
+
+  if(row_limit-1 > 0)
+    for(var x = Math.max(0, i-1); x <= Math.min(i+1, row_limit-1); x++)
+      for(var y = Math.max(0, j-1); y <= Math.min(j+1, column_limit-1); y++)
         if((x != i || y != j) && minado.revelado[x*9 + y] == 0){
           campos[x*9 + y].innerText = minado.casas[x*9 + y];
-          minado.revelado[x*9+y] = 1;
+          if(minado.revelado[x*9+y] == 0){
+            minado.revelado[x*9+y] = 1;
+            minado.revelados++;
+          }
           if(minado.casas[x*9+y] == 0)
-            adjacente(x,y);
+          adjacente(x,y);
         }
-      }
-    }
-  }
 }
-var m;
-var s;
-var mm;
-var text = document.getElementById("textocampominado");
-var intervalo;
 
-function gerar(){
+
+function iniciar(){
   minado.gerar();
 
-  for(var i = 0; i < 81; i++)
-  campos[i].innerText = "";
+  for(var i = 0; i < qtdcampos; i++){
+    campos[i].innerText = "";
+    campos[i].onclick = function(){
+      checar(this);
+    };
+  }
 
   m = 0;
   s = 0;
@@ -158,5 +112,4 @@ function gerar(){
 
     mm = mm + 1;
   }, 10);
-
 }
