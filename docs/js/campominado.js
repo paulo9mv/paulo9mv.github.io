@@ -1,8 +1,8 @@
 class Minado{
   constructor(){
-  this.casas = [];
-  this.revelado = [];
-  this.zerar();
+    this.casas = [];
+    this.revelado = [];
+    this.zerar();
   }
   zerar(){
     for(var i = 0; i < 81; i++){
@@ -13,9 +13,9 @@ class Minado{
   gerar(){
     this.zerar();
     for (var i = 0; i < campos.length; i++) {
-        campos[i].onclick = function(){
-          checar(this);
-        };
+      campos[i].onclick = function(){
+        checar(this);
+      };
     }
     for(var i = 0; i < nbombas;){
       var rand = Math.floor(Math.random() * 81);
@@ -24,7 +24,6 @@ class Minado{
         i++;
       }
     }
-    //console.log(minado);
     this.preencher();
   }
   preencher(){
@@ -32,19 +31,18 @@ class Minado{
 
     for(var i = 0; i < 9; i++){
       for(var j = 0; j < 9; j++){
-      if(minado.casas[i*9 + j] == '*'){
+        if(minado.casas[i*9 + j] == '*'){
 
-        if(row_limit > 0){
-          for(var x = Math.max(0, i-1); x <= Math.min(i+1, row_limit); x++){
-            for(var y = Math.max(0, j-1); y <= Math.min(j+1, column_limit); y++){
-              if((x != i || y != j) && minado.casas[x*9 + y] != '*'){
-                minado.casas[x*9 + y] += 1;
-                //console.log("Adjacente " + (x*9 + y) + " " + (i*9+j));
+          if(row_limit > 0){
+            for(var x = Math.max(0, i-1); x <= Math.min(i+1, row_limit); x++){
+              for(var y = Math.max(0, j-1); y <= Math.min(j+1, column_limit); y++){
+                if((x != i || y != j) && minado.casas[x*9 + y] != '*'){
+                  minado.casas[x*9 + y] += 1;
+                }
               }
             }
           }
         }
-      }
       }
     }
 
@@ -63,45 +61,37 @@ function checar(a){
   var indice = i*9 + j;
 
   if(minado.casas[indice] != '*'){
-  if(minado.casas[indice] != '*' && minado.casas[indice] != 0){
-    campos[indice].innerText = minado.casas[indice];
-    minado.revelado[indice] = 1;
-  }
-  //// TODO: Definir quando clica na bomba
-  else if(minado.casas[indice] == 0 && minado.revelado[indice] == 0){
-    adjacente(i,j);
-  }
+    if(minado.casas[indice] != '*' && minado.casas[indice] != 0){
+      campos[indice].innerText = minado.casas[indice];
+      minado.revelado[indice] = 1;
+    }
 
-  if(checkwin()){
-    console.log("Wingame()");
-    wingame();
-  }
+    else if(minado.casas[indice] == 0 && minado.revelado[indice] == 0)
+      adjacente(i,j);
+
+    checkwin();
 
   }
-  else{
-    endgame();
-  }
+  else
+  endgame();
+
 }
 function wingame(){
   clearInterval(intervalo);
-  for(var i = 0; i < 81; i++){
+  for(var i = 0; i < 81; i++)
+  campos[i].onclick=function(){};
 
-    campos[i].onclick=function(){};
-  }
   text.innerText = "Você venceu! Seu tempo foi de " + text.innerText;
 }
 function checkwin(){
   let cont = 0;
   for(var i = 0; i < 81; i++){
     if(minado.revelado[i] == 0)
-      cont++;
+    cont++;
   }
-  console.log("Faltam revelar " + cont);
-  if(cont == nbombas){
-    console.log("Fim de jogo.");
-    return true;
-  }
-  return false;
+  if(cont == nbombas)
+  wingame();
+
 }
 function endgame(){
   for(var i = 0; i < 81; i++){
@@ -119,8 +109,7 @@ function adjacente(i,j){
   var column_limit = 8;
   campos[i*9 + j].innerText = minado.casas[i*9 + j];
   minado.revelado[i*9+j] = 1;
-  //i,j -> casa analisada
-  //x,y -> casas adjacentes
+
   if(row_limit > 0){
     for(var x = Math.max(0, i-1); x <= Math.min(i+1, row_limit); x++){
       for(var y = Math.max(0, j-1); y <= Math.min(j+1, column_limit); y++){
@@ -134,47 +123,40 @@ function adjacente(i,j){
     }
   }
 }
-var m ;
-var s ;
-var mm ;
+var m;
+var s;
+var mm;
 var text = document.getElementById("textocampominado");
 var intervalo;
 
-function parar(){
-  clearInterval(intervalo);
-}
 function gerar(){
   minado.gerar();
 
   for(var i = 0; i < 81; i++)
-    campos[i].innerText = "";
+  campos[i].innerText = "";
 
-    text.innerText = "Bom jogo!";
+  m = 0;
+  s = 0;
+  mm = 0;
+  clearInterval(intervalo);
+  intervalo = 0;
 
-    m = 0;
-    s = 0;
-    mm = 0;
-    clearInterval(intervalo);
-    intervalo = 0;
-    intervalo = window.setInterval(function(){
-      if (mm == 100) {
-        s++;
-        mm = 0;
-      }
-      if (s == 60) { m++; s = 0;}
-      if (m < 10)
-      text.innerText = "0" + m + "m:";
-      else
-      text.innerText = m + "m:";
-      if (s < 10)
-      text.innerText = text.innerText + "0" + s + "s:";
-      else text.innerText = text.innerText + s + "s:";
-      if (mm < 10)
-      text.innerText = text.innerText + "0" + mm;
-      else
-      text.innerText = text.innerText + mm;
-      //console.log(text.innerText);
-      mm = mm + 1;
-    }, 10);
+  intervalo = window.setInterval(function(){
+    if (mm == 100) { s++; mm = 0; }
+    if (s == 60) { m++; s = 0;}
+    if (m < 10)
+    text.innerText = "0" + m + "m:";
+    else
+    text.innerText = m + "m:";
+    if (s < 10)
+    text.innerText = text.innerText + "0" + s + "s:";
+    else text.innerText = text.innerText + s + "s:";
+    if (mm < 10)
+    text.innerText = text.innerText + "0" + mm;
+    else
+    text.innerText = text.innerText + mm;
+
+    mm = mm + 1;
+  }, 10);
 
 }
