@@ -48,7 +48,7 @@ function checkwin(){
 function endgame(){
   for(var i = 0; i < 81; i++){
     if(minado.casas[i] == '*')
-    campos[i].innerText = minado.casas[i];
+    campos[i].innerHTML = '<i class="fas fa-bomb"></i>';
 
     campos[i].onclick=function(){};
   }
@@ -82,6 +82,9 @@ function adjacente(i,j){
 function iniciar(){
   minado.gerar();
 
+  var a = document.getElementById("icone");
+  a.className = "far fa-flag";
+
   for(var i = 0; i < qtdcampos; i++){
     campos[i].innerText = "";
     campos[i].onclick = function(){
@@ -112,4 +115,36 @@ function iniciar(){
 
     mm = mm + 1;
   }, 10);
+}
+function trocar(){
+
+  var a = document.getElementById("icone");
+
+  if(a.className == "far fa-flag"){
+    console.log("Marcando");
+    a.className = "fas fa-flag";
+    for(var i = 0; i < qtdcampos; i++){
+      campos[i].onclick=function(){
+        marcar(this);
+      };
+    }
+  }
+  else{
+    a.className = "far fa-flag";
+    for(var i = 0; i < qtdcampos; i++)
+    campos[i].onclick = function(){
+      checar(this);
+    };
+  }
+}
+function marcar(a){
+  var i = a.parentNode.rowIndex;
+  var j = a.cellIndex;
+
+  var indice = i*9 + j;
+
+  if(minado.revelado[indice] == 0){
+    campos[indice].innerHTML = '<i class="fas fa-flag"></i>';
+    console.log("nao foi revelado");
+  }
 }
