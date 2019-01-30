@@ -1,0 +1,10 @@
+/*!
+ * Start Bootstrap - Resume v5.0.2 (https://startbootstrap.com/template-overviews/resume)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-resume/blob/master/LICENSE)
+ */
+
+.btn-outline-dark--nonhover:hover {
+  color: #343a40 !important;
+  background-color: inherit !important;
+}

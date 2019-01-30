@@ -6,8 +6,8 @@ var mm;
 
 var intervalo;
 
-const qtdcampos = 81;
-const nbombas = 10;
+var qtdcampos = 81;
+var nbombas = 10;
 var row_limit = 9;
 var column_limit = 9;
 
