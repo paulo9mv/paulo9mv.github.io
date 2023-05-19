@@ -1,0 +1,14 @@
+name: 'teste'
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  teste:
+    name: Teste
+    runs-on: ubuntu-latest
+    environment: 'sandbox'
+    steps:
+      - run: echo "success"
