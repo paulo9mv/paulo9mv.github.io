@@ -1,0 +1,15 @@
+name: 'teste'
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  teste:
+    name: Teste
+    runs-on: ubuntu-latest
+    environment: 'sandbox'
+    steps:
+      - run: echo "success"
