@@ -1,0 +1,19 @@
+name: 'teste2'
+
+on:
+  workflow_run:
+    workflows: [teste]
+    types:
+      - completed
+    
+      
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  teste:
+    name: Teste 1
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "success"
